@@ -2,7 +2,7 @@
 
 docker_user: "cmays"
 github_user: "cmays20"
-docker_registry: "registry.cmays-demo.com:5000/"
+docker_registry: "registry.cmays-demo.com/"
 
 resource "src-git": {
   type: "git"
