@@ -2,6 +2,7 @@
 
 docker_user: "cmays"
 github_user: "cmays20"
+docker_registry: "registry.cmays-demo.com:5000/"
 
 resource "src-git": {
   type: "git"
@@ -11,7 +12,7 @@ resource "src-git": {
 
 resource "docker-image": {
   type: "image"
-  param url: docker_user + "/tomcat-demo:$(context.build.name)"
+  param url: docker_registry + docker_user + "/tomcat-demo:$(context.build.name)"
   param digest: "$(inputs.resources.docker-image.digest)"
 }
 
@@ -54,7 +55,7 @@ task "deploy": {
       workingDir: "/workspace/gitops-git"
       args: [
         "-git-revision=$(context.git.commit)",
-        "-substitute=imageName=" + docker_user + "/tomcat-demo@$(inputs.resources.docker-image.digest)",
+        "-substitute=imageName=" + docker_registry + docker_user + "/tomcat-demo@$(inputs.resources.docker-image.digest)",
         "--force-push"
       ]
     }

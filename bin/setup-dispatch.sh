@@ -28,3 +28,8 @@ fi
 #     This step creates the webhook in the Developers GitHub repository
 #     This may also be done in the Dispatch UI!
 dispatch ci repository create --service-account dispatch-sa --namespace dispatch
+
+dispatch gitops app create tomcat-demo \
+         --repository=https://github.com/${GITHUB_USERNAME}/tomcat-gitops \
+         --service-account dispatch-sa \
+         --namespace dispatch
